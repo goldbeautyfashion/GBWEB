@@ -1,8 +1,12 @@
-import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
+import { createContext, useContext, useState, ReactNode } from 'react';
+
+const ADMIN_USERNAME = 'admin';
+const ADMIN_PASSWORD = 'admin';
+const ADMIN_PIN = '0123';
 
 interface AdminAuth {
   isAuthenticated: boolean;
-  login: (password: string) => boolean;
+  login: (username: string, password: string, pin: string) => boolean;
   logout: () => void;
 }
 
@@ -12,13 +16,15 @@ export const AdminAuthProvider = ({ children }: { children: ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
     try {
       return sessionStorage.getItem('admin_authenticated') === 'true';
-    } catch {
-      return false;
-    }
+    } catch { return false; }
   });
 
-  const login = (password: string) => {
-    if (password === 'goldbeauty2024') {
+  const login = (username: string, password: string, pin: string): boolean => {
+    if (
+      username.trim().toLowerCase() === ADMIN_USERNAME &&
+      password === ADMIN_PASSWORD &&
+      pin.trim() === ADMIN_PIN
+    ) {
       setIsAuthenticated(true);
       sessionStorage.setItem('admin_authenticated', 'true');
       return true;
@@ -39,9 +45,7 @@ export const AdminAuthProvider = ({ children }: { children: ReactNode }) => {
 };
 
 export const useAdminAuth = () => {
-  const context = useContext(AdminAuthContext);
-  if (context === undefined) {
-    throw new Error('useAdminAuth must be used within a AdminAuthProvider');
-  }
-  return context;
+  const ctx = useContext(AdminAuthContext);
+  if (!ctx) throw new Error('useAdminAuth must be used within AdminAuthProvider');
+  return ctx;
 };

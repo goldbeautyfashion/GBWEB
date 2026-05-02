@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
+import { createContext, useContext, useState, ReactNode, useEffect, useCallback } from 'react';
 
 export interface SocialMedia {
   facebook: string;
@@ -86,33 +86,79 @@ const defaultSiteConfig: SiteConfig = {
   },
 };
 
+const API_BASE = '/api/gb';
+
 interface SiteConfigContextType {
   siteConfig: SiteConfig;
-  updateSiteConfig: (config: Partial<SiteConfig>) => void;
-  resetSiteConfig: () => void;
+  loading: boolean;
+  updateSiteConfig: (config: Partial<SiteConfig>) => Promise<void>;
+  resetSiteConfig: () => Promise<void>;
 }
 
 const SiteConfigContext = createContext<SiteConfigContextType | undefined>(undefined);
 
 export const SiteConfigProvider = ({ children }: { children: ReactNode }) => {
-  const [siteConfig, setSiteConfig] = useState<SiteConfig>(() => {
-    try {
-      const saved = localStorage.getItem('gold_beauty_site_config');
-      return saved ? { ...defaultSiteConfig, ...JSON.parse(saved) } : defaultSiteConfig;
-    } catch { return defaultSiteConfig; }
-  });
+  const [siteConfig, setSiteConfig] = useState<SiteConfig>(defaultSiteConfig);
+  const [loading, setLoading] = useState(true);
 
+  // Load config from DB on mount, merge with defaults
   useEffect(() => {
-    localStorage.setItem('gold_beauty_site_config', JSON.stringify(siteConfig));
+    const load = async () => {
+      try {
+        const res = await fetch(`${API_BASE}/config`);
+        if (res.ok) {
+          const data = await res.json();
+          const merged: SiteConfig = { ...defaultSiteConfig };
+          for (const [key, value] of Object.entries(data.config ?? {})) {
+            if (key in merged) (merged as Record<string, unknown>)[key] = value;
+          }
+          setSiteConfig(merged);
+        }
+      } catch {
+        // Fallback to localStorage
+        try {
+          const saved = localStorage.getItem('gold_beauty_site_config');
+          if (saved) setSiteConfig(prev => ({ ...prev, ...JSON.parse(saved) }));
+        } catch { /* ignore */ }
+      } finally {
+        setLoading(false);
+      }
+    };
+    load();
+  }, []);
+
+  const persistToDb = useCallback(async (config: Partial<SiteConfig>) => {
+    try {
+      // Save each changed key to the DB
+      const entries: Record<string, unknown> = {};
+      for (const [key, value] of Object.entries(config)) {
+        entries[key] = value;
+      }
+      await fetch(`${API_BASE}/config`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(entries),
+      });
+    } catch {
+      // Fallback: save to localStorage
+      localStorage.setItem('gold_beauty_site_config', JSON.stringify(siteConfig));
+    }
   }, [siteConfig]);
 
-  const updateSiteConfig = (config: Partial<SiteConfig>) =>
-    setSiteConfig(prev => ({ ...prev, ...config }));
+  const updateSiteConfig = async (config: Partial<SiteConfig>) => {
+    const updated = { ...siteConfig, ...config };
+    setSiteConfig(updated);
+    await persistToDb(config);
+  };
 
-  const resetSiteConfig = () => setSiteConfig(defaultSiteConfig);
+  const resetSiteConfig = async () => {
+    setSiteConfig(defaultSiteConfig);
+    // Save all defaults to DB
+    await persistToDb(defaultSiteConfig);
+  };
 
   return (
-    <SiteConfigContext.Provider value={{ siteConfig, updateSiteConfig, resetSiteConfig }}>
+    <SiteConfigContext.Provider value={{ siteConfig, loading, updateSiteConfig, resetSiteConfig }}>
       {children}
     </SiteConfigContext.Provider>
   );

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'wouter';
-import { ShoppingBag, User, Menu, X, Instagram, Facebook, Youtube, Music2, MessageCircle } from 'lucide-react';
+import { ShoppingBag, Menu, X, Instagram, Facebook, Youtube, Music2, MessageCircle } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { useSiteConfig } from '@/context/SiteConfigContext';
 import { cn } from '@/lib/utils';
@@ -98,9 +98,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   )} />
                 </span>
               </Link>
-              <button className="text-foreground hover:text-primary transition-colors p-2">
-                <User size={20} strokeWidth={1.5} />
-              </button>
               <Link href="/cart">
                 <span className="text-foreground hover:text-primary transition-colors p-2 relative cursor-pointer block">
                   <ShoppingBag size={20} strokeWidth={1.5} />
