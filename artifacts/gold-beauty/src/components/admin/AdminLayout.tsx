@@ -3,8 +3,9 @@ import { Link, useLocation } from 'wouter';
 import { useAdminAuth } from '@/context/AdminAuthContext';
 import { cn } from '@/lib/utils';
 import {
-  LayoutDashboard, ShoppingBag, Package, Users, BarChart3,
-  Palette, Settings, LogOut, Search, Bell, TrendingUp, Database,
+  LayoutDashboard, ShoppingBag, Package, Users,
+  Palette, Settings, LogOut, Bell, TrendingUp, Database,
+  Sparkles,
 } from 'lucide-react';
 
 interface AdminLayoutProps { children: ReactNode; }
@@ -21,7 +22,6 @@ export function AdminLayout({ children }: AdminLayoutProps) {
     '/admin/products': 'Products',
     '/admin/customers': 'Customers',
     '/admin/website-editor': 'Website Editor',
-    '/admin/analytics': 'Analytics',
     '/admin/settings': 'Settings',
     '/admin/financial-report': 'Financial Report',
     '/admin/data-management': 'Data Management',
@@ -29,7 +29,8 @@ export function AdminLayout({ children }: AdminLayoutProps) {
 
   const navItems = [
     {
-      group: 'STORE', items: [
+      group: 'STORE',
+      items: [
         { path: '/admin/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
         { path: '/admin/orders', icon: ShoppingBag, label: 'Orders' },
         { path: '/admin/products', icon: Package, label: 'Products' },
@@ -37,50 +38,69 @@ export function AdminLayout({ children }: AdminLayoutProps) {
       ]
     },
     {
-      group: 'TOOLS', items: [
-        { path: '/admin/analytics', icon: BarChart3, label: 'Analytics' },
+      group: 'TOOLS',
+      items: [
         { path: '/admin/financial-report', icon: TrendingUp, label: 'Financial Report' },
         { path: '/admin/website-editor', icon: Palette, label: 'Website Editor' },
       ]
     },
     {
-      group: 'ADMIN', items: [
+      group: 'ADMIN',
+      items: [
         { path: '/admin/data-management', icon: Database, label: 'Data & Backup' },
         { path: '/admin/settings', icon: Settings, label: 'Settings' },
       ]
     },
   ];
 
+  const currentTitle = titles[location] ?? 'Admin';
+
   return (
-    <div className="min-h-screen bg-[#F8F9FA] flex text-foreground font-sans">
-      <aside className="w-64 bg-white border-r border-border flex flex-col fixed h-full z-20">
-        <div className="p-6 border-b border-border flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-primary" />
-          <div>
-            <h2 className="font-bold text-lg leading-tight">GB Admin</h2>
-            <p className="text-xs text-muted-foreground">Gold Beauty Fashion</p>
+    <div className="min-h-screen bg-[#F5F4F0] flex text-foreground font-sans">
+      {/* Sidebar */}
+      <aside className="w-60 bg-white flex flex-col fixed h-full z-20 shadow-[1px_0_0_0_#E8E4DC]">
+
+        {/* Brand Header */}
+        <div className="px-5 py-5 border-b border-[#EDE9E0]">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-[#A77F1B] to-[#C9A84C] flex items-center justify-center shadow-sm">
+              <Sparkles size={16} className="text-white" />
+            </div>
+            <div>
+              <p className="font-bold text-sm tracking-wide text-[#1A1A1A] leading-none">GB Admin</p>
+              <p className="text-[11px] text-[#A77F1B] mt-0.5 font-medium tracking-widest uppercase">Gold Beauty</p>
+            </div>
           </div>
         </div>
 
-        <div className="flex-1 overflow-y-auto py-4 px-3 flex flex-col gap-4">
+        {/* Nav */}
+        <div className="flex-1 overflow-y-auto py-5 px-3 space-y-5">
           {navItems.map((group, idx) => (
             <div key={idx}>
-              <h3 className="text-xs font-semibold text-muted-foreground tracking-wider mb-1.5 px-3">
+              <p className="text-[10px] font-bold tracking-[0.15em] text-[#B8AFA0] uppercase px-3 mb-2">
                 {group.group}
-              </h3>
+              </p>
               <div className="space-y-0.5">
                 {group.items.map((item) => {
                   const isActive = location === item.path;
                   return (
                     <Link key={item.path} href={item.path}>
                       <span className={cn(
-                        'flex items-center gap-3 px-3 py-2 rounded-md transition-colors cursor-pointer border-l-2 text-sm',
+                        'flex items-center gap-2.5 px-3 py-2.5 rounded-lg transition-all cursor-pointer text-sm font-medium',
                         isActive
-                          ? 'bg-amber-50 text-primary border-primary font-medium'
-                          : 'border-transparent text-gray-500 hover:text-gray-900 hover:bg-gray-50'
+                          ? 'bg-[#FBF7EE] text-[#A77F1B] shadow-[inset_0_0_0_1px_#E8D9A8]'
+                          : 'text-[#6B6560] hover:text-[#1A1A1A] hover:bg-[#F8F5EF]'
                       )}>
-                        <item.icon size={17} />
+                        <span className={cn(
+                          'w-7 h-7 rounded-md flex items-center justify-center transition-colors',
+                          isActive ? 'bg-[#A77F1B]/10' : 'bg-transparent'
+                        )}>
+                          <item.icon size={15} strokeWidth={isActive ? 2.5 : 1.8} />
+                        </span>
                         {item.label}
+                        {isActive && (
+                          <span className="ml-auto w-1.5 h-1.5 rounded-full bg-[#A77F1B]" />
+                        )}
                       </span>
                     </Link>
                   );
@@ -90,50 +110,56 @@ export function AdminLayout({ children }: AdminLayoutProps) {
           ))}
         </div>
 
-        <div className="p-4 border-t border-border">
+        {/* Footer */}
+        <div className="p-3 border-t border-[#EDE9E0] space-y-1">
+          <Link href="/" target="_blank">
+            <span className="flex items-center gap-2.5 px-3 py-2 text-xs text-[#6B6560] hover:text-[#1A1A1A] hover:bg-[#F8F5EF] rounded-lg transition-all cursor-pointer font-medium">
+              <span className="w-7 h-7 rounded-md bg-transparent flex items-center justify-center">
+                <Package size={13} strokeWidth={1.8} />
+              </span>
+              View Website
+            </span>
+          </Link>
           <button
             onClick={handleLogout}
-            className="flex items-center gap-3 px-3 py-2 text-destructive hover:bg-destructive/10 rounded-md w-full transition-colors text-sm font-medium"
+            className="w-full flex items-center gap-2.5 px-3 py-2 text-xs text-red-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all font-medium"
           >
-            <LogOut size={17} /> Log out
+            <span className="w-7 h-7 rounded-md bg-transparent flex items-center justify-center">
+              <LogOut size={13} strokeWidth={1.8} />
+            </span>
+            Sign Out
           </button>
         </div>
       </aside>
 
-      <div className="flex-1 ml-64 flex flex-col">
-        <header className="h-16 bg-white border-b border-border flex items-center justify-between px-8 sticky top-0 z-10">
+      {/* Main Content */}
+      <div className="flex-1 ml-60 flex flex-col min-h-screen">
+
+        {/* Top Header */}
+        <header className="h-14 bg-white border-b border-[#EDE9E0] flex items-center justify-between px-7 sticky top-0 z-10">
           <div className="flex items-center gap-2 text-sm">
-            <span className="text-muted-foreground">Pages</span>
-            <span className="text-muted-foreground">/</span>
-            <span className="font-medium">{titles[location] ?? 'Admin'}</span>
+            <span className="text-[#B8AFA0] text-xs">Admin</span>
+            <span className="text-[#D4CCBF] text-xs">›</span>
+            <span className="font-semibold text-[#1A1A1A] text-sm">{currentTitle}</span>
           </div>
 
-          <div className="flex-1 max-w-md mx-8 relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size={16} />
-            <input
-              type="search"
-              placeholder="Search..."
-              className="w-full pl-10 pr-4 py-2 bg-gray-50 border-none rounded-full text-sm focus:ring-1 focus:ring-primary focus:outline-none"
-            />
-          </div>
-
-          <div className="flex items-center gap-4 text-muted-foreground">
-            <button className="hover:text-foreground transition-colors relative">
-              <Bell size={20} strokeWidth={1.5} />
-              <span className="absolute top-0 right-0 w-2 h-2 bg-destructive rounded-full border border-white" />
+          <div className="flex items-center gap-3">
+            <button className="relative w-8 h-8 flex items-center justify-center rounded-lg hover:bg-[#F8F5EF] transition-colors text-[#6B6560] hover:text-[#1A1A1A]">
+              <Bell size={17} strokeWidth={1.8} />
+              <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-red-500 rounded-full" />
             </button>
             <Link href="/admin/settings">
-              <span className="hover:text-foreground transition-colors cursor-pointer">
-                <Settings size={20} strokeWidth={1.5} />
+              <span className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-[#F8F5EF] transition-colors text-[#6B6560] hover:text-[#1A1A1A] cursor-pointer">
+                <Settings size={17} strokeWidth={1.8} />
               </span>
             </Link>
-            <div className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-semibold border border-primary/20">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#A77F1B] to-[#C9A84C] text-white flex items-center justify-center text-xs font-bold shadow-sm">
               SR
             </div>
           </div>
         </header>
 
-        <main className="flex-1 p-8 overflow-y-auto">
+        <main className="flex-1 p-7 overflow-y-auto">
           {children}
         </main>
       </div>

@@ -216,18 +216,42 @@ function ViewOrderModal({ order, onClose }: { order: AnyOrder; onClose: () => vo
           ) : null)}
 
           {order.trackingNumber && (
-            <div className="p-3 rounded-md bg-blue-50 border border-blue-200 space-y-2">
-              <p className="text-xs font-semibold text-blue-700 uppercase tracking-wider">Courier Tracking</p>
-              <div className="flex justify-between"><span className="text-muted-foreground">Courier</span><span className="font-medium">{order.courierName}</span></div>
-              <div className="flex justify-between items-center">
-                <span className="text-muted-foreground">Tracking #</span>
-                <span className="font-mono text-xs bg-white border border-blue-200 px-2 py-1 rounded">{order.trackingNumber}</span>
+            <div className="rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 overflow-hidden">
+              <div className="flex items-center gap-2 px-4 py-2.5 bg-blue-600 text-white">
+                <Truck size={14} />
+                <span className="text-xs font-bold tracking-wider uppercase">Courier Tracking</span>
               </div>
-              {order.courierUrl && (
-                <a href={order.courierUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-xs text-blue-600 hover:underline">
-                  <ExternalLink size={12} /> Track on {order.courierName || 'Courier Site'}
-                </a>
-              )}
+              <div className="p-4 space-y-3">
+                <div className="flex justify-between text-sm">
+                  <span className="text-muted-foreground">Courier</span>
+                  <span className="font-semibold text-foreground">{order.courierName || '—'}</span>
+                </div>
+                <div className="flex justify-between items-center text-sm">
+                  <span className="text-muted-foreground">Tracking No.</span>
+                  <div className="flex items-center gap-2">
+                    <span className="font-mono text-xs bg-white border border-blue-200 px-2.5 py-1 rounded-md font-bold tracking-widest text-blue-700">
+                      {order.trackingNumber}
+                    </span>
+                    <button
+                      onClick={() => { navigator.clipboard.writeText(order.trackingNumber!); toast.success('Tracking number copied!'); }}
+                      className="text-muted-foreground hover:text-blue-600 transition-colors"
+                      title="Copy"
+                    >
+                      <Copy size={13} />
+                    </button>
+                  </div>
+                </div>
+                {order.courierUrl && (
+                  <a
+                    href={order.courierUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-1 flex items-center justify-center gap-2 w-full bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-2.5 rounded-lg transition-colors tracking-wider uppercase"
+                  >
+                    <ExternalLink size={13} /> Track Order with {order.courierName || 'Courier'}
+                  </a>
+                )}
+              </div>
             </div>
           )}
 

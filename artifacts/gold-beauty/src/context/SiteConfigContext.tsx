@@ -29,6 +29,7 @@ export interface SiteConfig {
   heroLine2: string;
   heroSubtitle: string;
   heroBgImage: string;
+  logo: string;
   aboutTitle: string;
   aboutText: string;
   showAnnouncement: boolean;
@@ -52,6 +53,7 @@ const defaultSiteConfig: SiteConfig = {
   heroLine2: 'Your Glow.',
   heroSubtitle: 'Discover opulent beauty curated for the modern Sri Lankan woman.',
   heroBgImage: '',
+  logo: '',
   aboutTitle: 'The Gold Standard',
   aboutText: 'We believe that luxury should not just be a label, but an experience. Every product in our collection is curated with the highest standards of quality, ensuring you receive nothing but the best.',
   showAnnouncement: true,
@@ -101,7 +103,6 @@ export const SiteConfigProvider = ({ children }: { children: ReactNode }) => {
   const [siteConfig, setSiteConfig] = useState<SiteConfig>(defaultSiteConfig);
   const [loading, setLoading] = useState(true);
 
-  // Load config from DB on mount, merge with defaults
   useEffect(() => {
     const load = async () => {
       try {
@@ -115,7 +116,6 @@ export const SiteConfigProvider = ({ children }: { children: ReactNode }) => {
           setSiteConfig(merged);
         }
       } catch {
-        // Fallback to localStorage
         try {
           const saved = localStorage.getItem('gold_beauty_site_config');
           if (saved) setSiteConfig(prev => ({ ...prev, ...JSON.parse(saved) }));
@@ -129,7 +129,6 @@ export const SiteConfigProvider = ({ children }: { children: ReactNode }) => {
 
   const persistToDb = useCallback(async (config: Partial<SiteConfig>) => {
     try {
-      // Save each changed key to the DB
       const entries: Record<string, unknown> = {};
       for (const [key, value] of Object.entries(config)) {
         entries[key] = value;
@@ -140,7 +139,6 @@ export const SiteConfigProvider = ({ children }: { children: ReactNode }) => {
         body: JSON.stringify(entries),
       });
     } catch {
-      // Fallback: save to localStorage
       localStorage.setItem('gold_beauty_site_config', JSON.stringify(siteConfig));
     }
   }, [siteConfig]);
@@ -153,7 +151,6 @@ export const SiteConfigProvider = ({ children }: { children: ReactNode }) => {
 
   const resetSiteConfig = async () => {
     setSiteConfig(defaultSiteConfig);
-    // Save all defaults to DB
     await persistToDb(defaultSiteConfig);
   };
 

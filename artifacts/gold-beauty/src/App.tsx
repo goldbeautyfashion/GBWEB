@@ -27,7 +27,6 @@ import AdminOrders from "@/pages/admin/orders";
 import AdminProducts from "@/pages/admin/products";
 import AdminCustomers from "@/pages/admin/customers";
 import AdminWebsiteEditor from "@/pages/admin/website-editor";
-import AdminAnalytics from "@/pages/admin/analytics";
 import AdminSettings from "@/pages/admin/settings";
 import AdminFinancialReport from "@/pages/admin/financial-report";
 import AdminDataManagement from "@/pages/admin/data-management";
@@ -53,7 +52,6 @@ function Router() {
       <Route path="/admin/products" component={() => <ProtectedAdminRoute component={AdminProducts} />} />
       <Route path="/admin/customers" component={() => <ProtectedAdminRoute component={AdminCustomers} />} />
       <Route path="/admin/website-editor" component={() => <ProtectedAdminRoute component={AdminWebsiteEditor} />} />
-      <Route path="/admin/analytics" component={() => <ProtectedAdminRoute component={AdminAnalytics} />} />
       <Route path="/admin/settings" component={() => <ProtectedAdminRoute component={AdminSettings} />} />
       <Route path="/admin/financial-report" component={() => <ProtectedAdminRoute component={AdminFinancialReport} />} />
       <Route path="/admin/data-management" component={() => <ProtectedAdminRoute component={AdminDataManagement} />} />
