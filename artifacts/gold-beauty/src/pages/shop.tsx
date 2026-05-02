@@ -46,19 +46,24 @@ export default function Shop() {
   }, [activeCategory, sortBy]);
 
   return (
-    <div className="w-full min-h-screen bg-background pb-20">
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      className="w-full min-h-screen bg-[#FAF8F4] pb-20"
+    >
       {/* Page Header */}
-      <div className="bg-card border-b border-border py-12 md:py-16">
+      <div className="bg-white border-b border-border py-16 md:py-24 shadow-sm">
         <div className="container mx-auto px-4 lg:px-8 text-center">
-          <h1 className="font-serif text-4xl md:text-5xl mb-4">The Collection</h1>
-          <p className="text-muted-foreground text-sm tracking-widest uppercase max-w-xl mx-auto">
+          <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl mb-4 text-foreground">The Collection</h1>
+          <p className="text-muted-foreground text-sm tracking-[0.2em] uppercase max-w-xl mx-auto">
             Discover our complete range of premium cosmetics
           </p>
         </div>
       </div>
 
-      <div className="container mx-auto px-4 lg:px-8 py-8">
-        <div className="flex flex-col lg:flex-row gap-8">
+      <div className="container mx-auto px-4 lg:px-8 py-12">
+        <div className="flex flex-col lg:flex-row gap-10">
           
           {/* Mobile Filter Toggle */}
           <div className="lg:hidden flex items-center justify-between pb-4 border-b border-border">
@@ -68,18 +73,18 @@ export default function Shop() {
             >
               <Filter size={16} /> FILTERS
             </button>
-            <span className="text-xs text-muted-foreground">{filteredProducts.length} Products</span>
+            <span className="text-xs text-muted-foreground font-medium">{filteredProducts.length} Products</span>
           </div>
 
           {/* Sidebar / Filters */}
           <aside className={`
-            lg:w-64 lg:shrink-0 lg:block
+            lg:w-64 lg:shrink-0 lg:block bg-white lg:bg-transparent lg:border-none border border-border p-6 lg:p-0
             ${isFilterOpen ? 'block' : 'hidden'}
           `}>
-            <div className="sticky top-28 space-y-10">
+            <div className="sticky top-28 space-y-12">
               <div>
-                <h3 className="text-sm font-semibold tracking-widest border-b border-border pb-4 mb-4">CATEGORIES</h3>
-                <ul className="space-y-3">
+                <h3 className="text-xs font-semibold tracking-[0.2em] border-b border-border pb-3 mb-5 uppercase text-foreground">Categories</h3>
+                <ul className="space-y-2">
                   {categories.map(cat => (
                     <li key={cat}>
                       <button
@@ -87,7 +92,8 @@ export default function Shop() {
                           setActiveCategory(cat);
                           setIsFilterOpen(false);
                         }}
-                        className={`text-sm tracking-wide transition-colors flex items-center justify-between w-full text-left ${activeCategory === cat ? 'text-primary font-medium' : 'text-muted-foreground hover:text-foreground'}`}
+                        className={`text-sm tracking-wide transition-all px-3 py-2 rounded-sm flex items-center justify-between w-full text-left 
+                          ${activeCategory === cat ? 'bg-primary/5 text-primary font-medium border border-primary/20' : 'text-muted-foreground hover:bg-white hover:text-foreground border border-transparent'}`}
                       >
                         {cat}
                         {activeCategory === cat && <Check size={14} />}
@@ -98,8 +104,8 @@ export default function Shop() {
               </div>
 
               <div>
-                <h3 className="text-sm font-semibold tracking-widest border-b border-border pb-4 mb-4">SORT BY</h3>
-                <ul className="space-y-3">
+                <h3 className="text-xs font-semibold tracking-[0.2em] border-b border-border pb-3 mb-5 uppercase text-foreground">Sort By</h3>
+                <ul className="space-y-2">
                   {[
                     { id: 'featured', label: 'Featured' },
                     { id: 'price-low', label: 'Price: Low to High' },
@@ -112,7 +118,8 @@ export default function Shop() {
                           setSortBy(sort.id);
                           setIsFilterOpen(false);
                         }}
-                        className={`text-sm tracking-wide transition-colors flex items-center justify-between w-full text-left ${sortBy === sort.id ? 'text-primary font-medium' : 'text-muted-foreground hover:text-foreground'}`}
+                        className={`text-sm tracking-wide transition-all px-3 py-2 rounded-sm flex items-center justify-between w-full text-left 
+                          ${sortBy === sort.id ? 'bg-primary/5 text-primary font-medium border border-primary/20' : 'text-muted-foreground hover:bg-white hover:text-foreground border border-transparent'}`}
                       >
                         {sort.label}
                         {sortBy === sort.id && <Check size={14} />}
@@ -127,24 +134,29 @@ export default function Shop() {
           {/* Product Grid */}
           <main className="flex-1">
             <div className="hidden lg:flex items-center justify-between mb-8 pb-4 border-b border-border">
-              <h2 className="font-serif text-2xl">{activeCategory === 'All' ? 'All Products' : activeCategory}</h2>
-              <span className="text-sm text-muted-foreground tracking-widest">{filteredProducts.length} Results</span>
+              <h2 className="font-serif text-3xl text-foreground">{activeCategory === 'All' ? 'All Products' : activeCategory}</h2>
+              <span className="text-sm text-muted-foreground tracking-widest font-medium">{filteredProducts.length} Results</span>
             </div>
 
             {filteredProducts.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+              <motion.div 
+                variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.08 } } }}
+                initial="hidden"
+                animate="visible"
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+              >
                 <AnimatePresence mode="popLayout">
                   {filteredProducts.map((product, index) => (
                     <ProductCard key={product.id} product={product} index={index % 6} />
                   ))}
                 </AnimatePresence>
-              </div>
+              </motion.div>
             ) : (
-              <div className="py-20 text-center text-muted-foreground">
+              <div className="py-20 text-center bg-white border border-border text-muted-foreground">
                 <p>No products found in this category.</p>
                 <button 
                   onClick={() => setActiveCategory('All')}
-                  className="mt-4 text-primary underline underline-offset-4 tracking-widest text-sm"
+                  className="mt-4 text-primary underline underline-offset-4 tracking-widest text-sm font-semibold"
                 >
                   View All Products
                 </button>
@@ -153,6 +165,6 @@ export default function Shop() {
           </main>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
