@@ -4,6 +4,7 @@ import { Star, ChevronRight, Truck, Award, ShieldCheck, Heart, ArrowDown } from 
 import { products, categories } from '@/data/products';
 import { ProductCard } from '@/components/product-card';
 import { useRef, useEffect } from 'react';
+import { useSiteConfig } from '@/context/SiteConfigContext';
 
 function Counter({ from, to }: { from: number, to: number }) {
   const ref = useRef(null);
@@ -22,7 +23,8 @@ function Counter({ from, to }: { from: number, to: number }) {
 }
 
 export default function Home() {
-  const bestSellers = products.slice(0, 8);
+  const { siteConfig } = useSiteConfig();
+  const bestSellers = products.filter(p => siteConfig.featuredProductIds.includes(p.id)).slice(0, 8);
   const { scrollY } = useScroll();
   const heroY = useTransform(scrollY, [0, 1000], [0, 300]);
   const heroOpacity = useTransform(scrollY, [0, 500], [1, 0]);
@@ -71,15 +73,15 @@ export default function Home() {
               variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
               className="font-serif text-5xl md:text-7xl lg:text-8xl leading-tight text-foreground mb-6"
             >
-              Redefine <br />
-              <span className="italic text-primary">Your Glow.</span>
+              {siteConfig.heroLine1} <br />
+              <span className="italic text-primary">{siteConfig.heroLine2}</span>
             </motion.h2>
             
             <motion.p 
               variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
               className="text-muted-foreground text-sm md:text-base tracking-widest max-w-md mb-10 leading-relaxed"
             >
-              Discover opulent beauty curated for the modern Sri Lankan woman.
+              {siteConfig.heroSubtitle}
             </motion.p>
             
             <motion.div 
@@ -88,12 +90,12 @@ export default function Home() {
             >
               <Link href="/shop">
                 <button className="bg-primary text-primary-foreground px-8 py-4 font-semibold tracking-[0.2em] text-sm hover:bg-accent transition-all duration-300 shadow-[0_4px_20px_rgba(167,127,27,0.3)]">
-                  EXPLORE COLLECTION
+                  {siteConfig.ctaText}
                 </button>
               </Link>
               <Link href="/track-order">
                 <button className="bg-transparent border border-primary text-primary px-8 py-4 font-semibold tracking-[0.2em] text-sm hover:bg-primary/5 transition-all duration-300">
-                  TRACK MY ORDER
+                  {siteConfig.ctaSecondaryText}
                 </button>
               </Link>
             </motion.div>
@@ -275,9 +277,9 @@ export default function Home() {
             >
               <div>
                 <p className="text-primary text-xs tracking-[0.3em] uppercase mb-2 font-semibold">Our Promise</p>
-                <h2 className="font-serif text-4xl md:text-5xl mb-6 text-foreground">The Gold Standard</h2>
+                <h2 className="font-serif text-4xl md:text-5xl mb-6 text-foreground">{siteConfig.aboutTitle}</h2>
                 <p className="text-muted-foreground text-sm leading-relaxed max-w-lg">
-                  We believe that luxury should not just be a label, but an experience. Every product in our collection is curated with the highest standards of quality, ensuring you receive nothing but the best.
+                  {siteConfig.aboutText}
                 </p>
               </div>
 

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'wouter';
 import { ShoppingBag, User, Menu, X, Instagram } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
+import { useSiteConfig } from '@/context/SiteConfigContext';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -10,6 +11,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [location] = useLocation();
   const { itemCount } = useCart();
+  const { siteConfig } = useSiteConfig();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,9 +31,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-[100dvh] flex flex-col bg-background text-foreground font-sans">
       {/* Announcement Bar */}
-      <div className="bg-primary text-primary-foreground text-xs font-semibold py-2 px-4 text-center tracking-widest uppercase z-50 relative">
-        COMPLIMENTARY ISLAND-WIDE DELIVERY ON ALL ORDERS OVER RS. 10,000
-      </div>
+      {siteConfig.showAnnouncement && (
+        <div className="bg-primary text-primary-foreground text-xs font-semibold py-2 px-4 text-center tracking-widest uppercase z-50 relative">
+          {siteConfig.announcementBar}
+        </div>
+      )}
 
       {/* Navigation */}
       <header 
