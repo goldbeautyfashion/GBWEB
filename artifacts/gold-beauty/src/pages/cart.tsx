@@ -45,7 +45,7 @@ function CheckoutModal({ onClose, onSuccess }: { onClose: () => void; onSuccess:
         type={type}
         value={form[id]}
         onChange={e => { setForm(p => ({ ...p, [id]: e.target.value })); setErrors(p => ({ ...p, [id]: '' })); }}
-        className={`w-full bg-[#FAF8F4] border px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors ${errors[id] ? 'border-destructive' : 'border-border'}`}
+        className={`w-full bg-[#FFF5F8] border px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors ${errors[id] ? 'border-destructive' : 'border-border'}`}
       />
       {errors[id] && <p className="text-destructive text-xs">{errors[id]}</p>}
     </div>
@@ -61,7 +61,7 @@ function CheckoutModal({ onClose, onSuccess }: { onClose: () => void; onSuccess:
 
         <form onSubmit={handleSubmit} className="p-6 space-y-6">
           {/* Order Summary mini */}
-          <div className="bg-[#FAF8F4] border border-border p-4 space-y-2">
+          <div className="bg-[#FFF5F8] border border-border p-4 space-y-2">
             <p className="text-xs font-semibold tracking-widest uppercase text-muted-foreground mb-3">Order Summary</p>
             {items.map(item => (
               <div key={item.product.id} className="flex justify-between text-sm">
@@ -154,7 +154,7 @@ function InvoiceModal({ order, onClose }: { order: Order; onClose: () => void })
 
           <div className="border border-border">
             <table className="w-full text-sm">
-              <thead className="bg-[#FAF8F4]">
+              <thead className="bg-[#FFF5F8]">
                 <tr>
                   <th className="text-left px-4 py-2 text-xs tracking-widest uppercase text-muted-foreground font-semibold">Product</th>
                   <th className="text-center px-4 py-2 text-xs tracking-widest uppercase text-muted-foreground font-semibold">Qty</th>
@@ -219,7 +219,7 @@ export default function Cart() {
 
   if (items.length === 0 && !completedOrder) {
     return (
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="w-full min-h-[70vh] bg-[#FAF8F4] flex flex-col items-center justify-center p-4 text-center">
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="w-full min-h-[70vh] bg-[#FFF5F8] flex flex-col items-center justify-center p-4 text-center">
         <div className="w-24 h-24 rounded-full bg-white border border-border shadow-sm flex items-center justify-center mb-8 text-primary">
           <ShoppingBag size={40} strokeWidth={1} />
         </div>
@@ -236,7 +236,7 @@ export default function Cart() {
 
   return (
     <>
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="w-full min-h-screen bg-[#FAF8F4] py-12 md:py-20">
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="w-full min-h-screen bg-[#FFF5F8] py-12 md:py-20">
         <div className="container mx-auto px-4 lg:px-8">
           <h1 className="font-serif text-4xl md:text-5xl mb-12 pb-6 border-b border-border text-foreground">Your Selection</h1>
 
@@ -255,7 +255,7 @@ export default function Cart() {
                   {items.map((item) => (
                     <motion.div key={item.product.id} layout initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex flex-col md:grid md:grid-cols-12 items-center gap-4 py-6">
                       <div className="col-span-6 flex items-center gap-6 w-full">
-                        <div className="w-24 h-24 shrink-0 border border-border bg-[#FAF8F4] p-2">
+                        <div className="w-24 h-24 shrink-0 border border-border bg-[#FFF5F8] p-2">
                           <img src={item.product.image} alt={item.product.name} className="w-full h-full object-cover" />
                         </div>
                         <div>

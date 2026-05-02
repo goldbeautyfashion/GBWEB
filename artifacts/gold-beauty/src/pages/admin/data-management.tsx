@@ -126,7 +126,7 @@ export default function DataManagement() {
           </div>
         </div>
         <table style="width:100%;border-collapse:collapse;font-size:11px;margin-bottom:12px">
-          <thead><tr style="background:#FAF8F4">
+          <thead><tr style="background:#FFF5F8">
             <th style="text-align:left;padding:6px 8px;color:#999;font-size:9px;text-transform:uppercase;letter-spacing:1px">Product</th>
             <th style="text-align:center;padding:6px 8px;color:#999;font-size:9px;text-transform:uppercase;letter-spacing:1px">Qty</th>
             <th style="text-align:right;padding:6px 8px;color:#999;font-size:9px;text-transform:uppercase;letter-spacing:1px">Price</th>

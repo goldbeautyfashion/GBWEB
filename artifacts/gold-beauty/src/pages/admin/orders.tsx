@@ -151,7 +151,7 @@ function ViewOrderModal({ order, onClose }: { order: AnyOrder; onClose: () => vo
       .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:28px}
       .info-block h4{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#999;margin:0 0 8px;font-family:sans-serif}
       table{width:100%;border-collapse:collapse;margin-bottom:20px}
-      thead{background:#FAF8F4} th{padding:10px 12px;font-size:9px;text-transform:uppercase;letter-spacing:1px;color:#999;font-family:sans-serif;text-align:left}
+      thead{background:#FFF5F8} th{padding:10px 12px;font-size:9px;text-transform:uppercase;letter-spacing:1px;color:#999;font-family:sans-serif;text-align:left}
       .text-right{text-align:right} .text-center{text-align:center}
       .totals{text-align:right} .total-row{display:flex;justify-content:flex-end;gap:40px;padding:4px 0;font-size:13px}
       .grand{font-size:18px;color:#A77F1B;border-top:2px solid #A77F1B;padding-top:8px;margin-top:8px}

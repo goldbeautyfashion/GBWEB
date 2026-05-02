@@ -593,8 +593,8 @@ export default function AdminWebsiteEditor() {
                   </div>
                 </div>
 
-                <div className="relative h-52 flex items-center justify-start bg-[#FAF8F4] overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#FAF8F4] via-[#FAF8F4]/80 to-transparent z-10" />
+                <div className="relative h-52 flex items-center justify-start bg-[#FFF5F8] overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#FFF5F8] via-[#FFF5F8]/80 to-transparent z-10" />
                   {localConfig.heroBgImage ? (
                     <img src={localConfig.heroBgImage} className="absolute inset-0 w-full h-full object-cover object-right" alt="" />
                   ) : (
@@ -613,7 +613,7 @@ export default function AdminWebsiteEditor() {
                   </div>
                 </div>
 
-                <div className="py-6 bg-[#FAF8F4] px-5">
+                <div className="py-6 bg-[#FFF5F8] px-5">
                   <div className="text-center mb-4">
                     <p className="text-[#A77F1B] tracking-[0.3em] uppercase font-semibold" style={{ fontSize: '8px' }}>Most Loved</p>
                     <p className="font-serif text-sm mt-0.5">Best Sellers</p>

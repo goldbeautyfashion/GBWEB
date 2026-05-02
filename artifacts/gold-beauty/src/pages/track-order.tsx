@@ -39,7 +39,7 @@ function printInvoice(order: Order) {
       .info-block h4{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#999;margin:0 0 8px}
       .info-block p{margin:2px 0;font-size:12px}
       table{width:100%;border-collapse:collapse;margin-bottom:16px}
-      thead{background:#FAF8F4} th{padding:10px 12px;font-size:9px;text-transform:uppercase;letter-spacing:1px;color:#999;text-align:left}
+      thead{background:#FFF5F8} th{padding:10px 12px;font-size:9px;text-transform:uppercase;letter-spacing:1px;color:#999;text-align:left}
       .tr{text-align:right} .tc{text-align:center}
       .totals{text-align:right;font-size:13px}
       .total-line{display:flex;justify-content:flex-end;gap:48px;padding:3px 0}
@@ -186,7 +186,7 @@ function OrderTrackingResult({ order }: { order: Order }) {
                       {(completed || current) && <span className="text-xs text-muted-foreground tracking-widest">{new Date(order.updatedAt).toLocaleDateString('en-LK', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</span>}
                     </div>
                     {current && (
-                      <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} transition={{ delay: 0.8 }} className="mt-2 p-4 bg-[#FAF8F4] border border-primary/20 text-sm text-foreground flex items-start gap-3">
+                      <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} transition={{ delay: 0.8 }} className="mt-2 p-4 bg-[#FFF5F8] border border-primary/20 text-sm text-foreground flex items-start gap-3">
                         <Icon className="text-primary mt-0.5 shrink-0" size={18} />
                         <p className="leading-relaxed">{step.detail}</p>
                       </motion.div>
@@ -205,7 +205,7 @@ function OrderTrackingResult({ order }: { order: Order }) {
         <div className="space-y-3">
           {order.items.map((item, i) => (
             <div key={i} className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-[#FAF8F4] border border-border p-1 shrink-0">
+              <div className="w-12 h-12 bg-[#FFF5F8] border border-border p-1 shrink-0">
                 <img src={item.image} alt={item.productName} className="w-full h-full object-cover" onError={e => { (e.target as HTMLImageElement).src = `https://placehold.co/48x48/FAF8F4/A77F1B?text=GB`; }} />
               </div>
               <div className="flex-1 min-w-0">
@@ -277,7 +277,7 @@ export default function TrackOrder() {
   };
 
   return (
-    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="w-full min-h-screen bg-[#FAF8F4] pb-24">
+    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="w-full min-h-screen bg-[#FFF5F8] pb-24">
       <div className="bg-white border-b border-border py-16 md:py-24 shadow-sm">
         <div className="container mx-auto px-4 lg:px-8 text-center">
           <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl mb-4 text-foreground">Track Your Glow</h1>
@@ -299,7 +299,7 @@ export default function TrackOrder() {
                     placeholder="e.g. GBF14GG7"
                     value={orderId}
                     onChange={e => { setOrderId(e.target.value); setTrackedOrder(null); }}
-                    className="w-full bg-[#FAF8F4] border border-border px-5 py-4 text-sm focus:outline-none focus:border-primary transition-colors text-foreground font-mono"
+                    className="w-full bg-[#FFF5F8] border border-border px-5 py-4 text-sm focus:outline-none focus:border-primary transition-colors text-foreground font-mono"
                     required
                   />
                 </div>
@@ -310,7 +310,7 @@ export default function TrackOrder() {
                     placeholder="e.g. 077 123 4567"
                     value={phone}
                     onChange={e => { setPhone(e.target.value); setTrackedOrder(null); }}
-                    className="w-full bg-[#FAF8F4] border border-border px-5 py-4 text-sm focus:outline-none focus:border-primary transition-colors text-foreground"
+                    className="w-full bg-[#FFF5F8] border border-border px-5 py-4 text-sm focus:outline-none focus:border-primary transition-colors text-foreground"
                     required
                   />
                 </div>

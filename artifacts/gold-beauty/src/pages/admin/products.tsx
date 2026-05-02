@@ -83,7 +83,7 @@ function EditProductModal({ product, onClose, onSave }: {
 
         <div className="p-6 space-y-4">
           {!isNew && form.image && (
-            <div className="w-20 h-20 border border-border bg-[#FAF8F4] p-1 mx-auto">
+            <div className="w-20 h-20 border border-border bg-[#FFF5F8] p-1 mx-auto">
               <img src={form.image} alt={form.name} className="w-full h-full object-cover" />
             </div>
           )}
@@ -224,7 +224,7 @@ export default function AdminProducts() {
                     return (
                       <tr key={product.id} className="hover:bg-gray-50/50 transition-colors">
                         <td className="px-6 py-3">
-                          <div className="w-12 h-12 rounded-md bg-[#FAF8F4] overflow-hidden border border-border">
+                          <div className="w-12 h-12 rounded-md bg-[#FFF5F8] overflow-hidden border border-border">
                             <img src={product.image} alt={product.name} className="w-full h-full object-cover" onError={e => { (e.target as HTMLImageElement).src = `https://placehold.co/48x48/FAF8F4/A77F1B?text=GB`; }} />
                           </div>
                         </td>
@@ -254,7 +254,7 @@ export default function AdminProducts() {
             <div className="p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 bg-white">
               {filteredProducts.map((product) => (
                 <div key={product.id} className="group border border-border rounded-lg overflow-hidden hover:shadow-md transition-all">
-                  <div className="aspect-square bg-[#FAF8F4] relative">
+                  <div className="aspect-square bg-[#FFF5F8] relative">
                     <img src={product.image} alt={product.name} className="w-full h-full object-cover" onError={e => { (e.target as HTMLImageElement).src = `https://placehold.co/200x200/FAF8F4/A77F1B?text=GB`; }} />
                     <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                       <button onClick={() => setEditingProduct(product)} className="p-2 bg-white rounded-full shadow-sm text-muted-foreground hover:text-primary transition-colors"><Edit size={14} /></button>

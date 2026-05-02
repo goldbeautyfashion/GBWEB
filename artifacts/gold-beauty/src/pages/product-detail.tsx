@@ -19,7 +19,7 @@ export default function ProductDetail() {
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="min-h-[60vh] flex flex-col items-center justify-center text-center px-4 bg-[#FAF8F4]"
+        className="min-h-[60vh] flex flex-col items-center justify-center text-center px-4 bg-[#FFF5F8]"
       >
         <h1 className="font-serif text-4xl mb-4 text-foreground">Product Not Found</h1>
         <p className="text-muted-foreground mb-8">The luxury item you are looking for does not exist.</p>
@@ -50,7 +50,7 @@ export default function ProductDetail() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="w-full min-h-screen bg-[#FAF8F4] pb-20"
+      className="w-full min-h-screen bg-[#FFF5F8] pb-20"
     >
       {/* Breadcrumb */}
       <div className="border-b border-border bg-white shadow-sm">

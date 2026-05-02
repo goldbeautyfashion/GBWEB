@@ -17,7 +17,7 @@ export function ProductCard({ product, index = 0, isNew = false }: { product: Pr
       className="group relative flex flex-col bg-white border border-border shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden"
     >
       <Link href={`/product/${product.id}`}>
-        <div className="cursor-pointer relative aspect-square overflow-hidden bg-[#FAF8F4] p-4">
+        <div className="cursor-pointer relative aspect-square overflow-hidden bg-[#FFF5F8] p-4">
           {/* New Badge */}
           {isNew && (
             <div className="absolute top-4 left-4 z-10 bg-primary text-white text-[0.6rem] font-bold tracking-widest uppercase px-2 py-1">

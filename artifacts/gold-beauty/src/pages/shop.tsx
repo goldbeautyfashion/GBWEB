@@ -50,7 +50,7 @@ export default function Shop() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="w-full min-h-screen bg-[#FAF8F4] pb-20"
+      className="w-full min-h-screen bg-[#FFF5F8] pb-20"
     >
       {/* Page Header */}
       <div className="bg-white border-b border-border py-16 md:py-24 shadow-sm">

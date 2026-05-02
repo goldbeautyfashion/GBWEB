@@ -6,7 +6,7 @@ export default function About() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="w-full min-h-screen bg-[#FAF8F4]"
+      className="w-full min-h-screen bg-[#FFF5F8]"
     >
       {/* Hero Section */}
       <div className="relative h-[70vh] min-h-[500px] flex items-center justify-center bg-white">
@@ -114,7 +114,7 @@ export default function About() {
               <p className="text-muted-foreground leading-relaxed text-base md:text-lg">
                 A veteran in the Sri Lankan fashion and beauty industry, Shani realized that local women were compromising between high-end international brands that didn't suit the climate, and local brands that lacked the premium feel.
               </p>
-              <p className="text-foreground font-serif italic leading-relaxed text-xl md:text-2xl mb-10 border-l-2 border-primary pl-6 py-2 bg-[#FAF8F4] p-6 shadow-sm">
+              <p className="text-foreground font-serif italic leading-relaxed text-xl md:text-2xl mb-10 border-l-2 border-primary pl-6 py-2 bg-[#FFF5F8] p-6 shadow-sm">
                 "I wanted to build a house of beauty where every touchpoint feels expensive, but the product genuinely performs for us. Gold Beauty is unapologetic. It's for the woman who wants to be seen, who commands the room, and who appreciates the fine details."
               </p>
               <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Signature_of_John_Hancock.svg" alt="Signature" className="h-16 opacity-80 mix-blend-multiply" style={{ filter: 'sepia(100%) hue-rotate(5deg) saturate(300%) contrast(150%) brightness(80%)' }} />
@@ -127,7 +127,7 @@ export default function About() {
               transition={{ duration: 0.8, ease: "easeOut" }}
               className="order-2 md:order-1 relative"
             >
-              <div className="aspect-square md:aspect-[3/4] bg-[#FAF8F4] border border-border p-6 shadow-xl relative z-10">
+              <div className="aspect-square md:aspect-[3/4] bg-[#FFF5F8] border border-border p-6 shadow-xl relative z-10">
                 <img 
                   src="/images/founder.png" 
                   alt="Shani Ranasinghe" 
@@ -179,7 +179,7 @@ export default function About() {
                 transition={{ delay: i * 0.2 }}
                 className="space-y-6 flex flex-col items-center bg-white p-10 border border-border shadow-sm hover:shadow-md transition-shadow"
               >
-                <div className="w-12 h-12 rounded-full bg-[#FAF8F4] flex items-center justify-center text-primary font-serif text-xl border border-primary/20 mb-2">
+                <div className="w-12 h-12 rounded-full bg-[#FFF5F8] flex items-center justify-center text-primary font-serif text-xl border border-primary/20 mb-2">
                   0{i+1}
                 </div>
                 <h3 className="font-serif text-2xl tracking-wide text-foreground">{value.title}</h3>
