@@ -1,0 +1,62 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "U0R-Oz7V9PX3me4XuyXbW"
+uri = "file://artifacts/gold-beauty/public/images/hero-bg.png"
+type = "image"
+title = "Hero cosmetics marble flat-lay"
+
+[[generated]]
+id = "CPvPGWI3rUVd_MFTa3V9P"
+uri = "file://artifacts/gold-beauty/public/images/cat-foundation.png"
+type = "image"
+title = "Foundation category image"
+
+[[generated]]
+id = "T57ne0z8TMhIQv7ur66bm"
+uri = "file://artifacts/gold-beauty/public/images/cat-lipstick.png"
+type = "image"
+title = "Lipstick category image"
+
+[[generated]]
+id = "NErHM22mgAkkO0w8R6qd1"
+uri = "file://artifacts/gold-beauty/public/images/cat-eyeshadow.png"
+type = "image"
+title = "Eyeshadow category image"
+
+[[generated]]
+id = "4LeRZULN6hUZMXRBziN3H"
+uri = "file://artifacts/gold-beauty/public/images/cat-fragrance.png"
+type = "image"
+title = "Fragrance category image"
+
+[[generated]]
+id = "C8_RNxASsuyA1Apr__KtA"
+uri = "file://artifacts/gold-beauty/public/images/cat-skincare.png"
+type = "image"
+title = "Skincare category image"
+
+[[generated]]
+id = "46IKCnKtrU_82TPRknkuY"
+uri = "file://artifacts/gold-beauty/public/images/prod-1.png"
+type = "image"
+title = "Gold Radiance Foundation"
+
+[[generated]]
+id = "pCusU6fi4snxpcqTv3IaN"
+uri = "file://artifacts/gold-beauty/public/images/prod-2.png"
+type = "image"
+title = "Velvet Rose Lipstick"
+
+[[generated]]
+id = "GENgac1b4cIJTQ27qrYDF"
+uri = "file://artifacts/gold-beauty/public/images/prod-3.png"
+type = "image"
+title = "Smoky Gold Eye Palette"
+
+[[generated]]
+id = "-pC59zgK-K7mLR3WFb_t0"
+uri = "file://artifacts/gold-beauty/public/images/prod-4.png"
+type = "image"
+title = "Oud Noir Perfume"
