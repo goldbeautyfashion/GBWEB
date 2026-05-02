@@ -4,6 +4,7 @@ import { Toaster as SonnerToaster } from "sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 import { CartProvider } from "@/context/CartContext";
+import { OrderProvider } from "@/context/OrderContext";
 import { SiteConfigProvider } from "@/context/SiteConfigContext";
 import { AdminAuthProvider, useAdminAuth } from "@/context/AdminAuthContext";
 
@@ -31,7 +32,7 @@ import AdminSettings from "@/pages/admin/settings";
 
 function ProtectedAdminRoute({ component: Component }: { component: React.ComponentType }) {
   const { isAuthenticated } = useAdminAuth();
-  
+
   if (!isAuthenticated) {
     return <AdminLogin />;
   }
@@ -96,13 +97,15 @@ function App() {
     <SiteConfigProvider>
       <AdminAuthProvider>
         <CartProvider>
-          <TooltipProvider>
-            <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-              <Router />
-            </WouterRouter>
-            <Toaster />
-            <SonnerToaster position="top-right" richColors />
-          </TooltipProvider>
+          <OrderProvider>
+            <TooltipProvider>
+              <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+                <Router />
+              </WouterRouter>
+              <Toaster />
+              <SonnerToaster position="top-right" richColors />
+            </TooltipProvider>
+          </OrderProvider>
         </CartProvider>
       </AdminAuthProvider>
     </SiteConfigProvider>
