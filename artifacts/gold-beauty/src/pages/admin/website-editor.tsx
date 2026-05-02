@@ -262,19 +262,45 @@ export default function AdminWebsiteEditor() {
 
       case 'store': return (
         <div className="space-y-5">
-          <SectionHeading title="Store Information" subtitle="Business details shown on the website." />
-          <FieldGroup label="Store / Brand Name">
+          <SectionHeading title="Store Information" subtitle="Brand name, tagline and contact details shown on the website." />
+
+          <div className="p-3.5 rounded-xl bg-amber-50 border border-amber-200">
+            <p className="text-xs font-bold text-amber-800 mb-1 tracking-widest uppercase">Live Preview — Header & Footer</p>
+            <p className="font-serif font-bold tracking-widest text-gray-900 text-sm">{localConfig.storeName.toUpperCase()}</p>
+            {localConfig.storeSubtitle && (
+              <p className="text-[10px] tracking-[0.3em] text-[#A77F1B] mt-0.5">{localConfig.storeSubtitle.toUpperCase()}</p>
+            )}
+          </div>
+
+          <FieldGroup label="Brand Name" note="Shown as the large title in the navigation and footer">
             <Input value={localConfig.storeName} onChange={e => set('storeName', e.target.value)} placeholder="Gold Beauty Fashion" />
           </FieldGroup>
-          <FieldGroup label="Contact Email">
-            <Input type="email" value={localConfig.contactEmail} onChange={e => set('contactEmail', e.target.value)} placeholder="hello@goldbeauty.lk" />
+
+          <FieldGroup label="Brand Subtitle" note="Shown in gold text below the brand name (e.g. By Shani Ranasinghe)">
+            <Input value={localConfig.storeSubtitle} onChange={e => set('storeSubtitle', e.target.value)} placeholder="By Shani Ranasinghe" />
           </FieldGroup>
-          <FieldGroup label="Phone Number">
-            <Input value={localConfig.contactPhone} onChange={e => set('contactPhone', e.target.value)} placeholder="+94 77 000 0000" />
+
+          <FieldGroup label="Footer Tagline" note="Short description shown in the website footer">
+            <Textarea
+              value={localConfig.footerTagline}
+              onChange={e => set('footerTagline', e.target.value)}
+              className="resize-none h-16 text-sm"
+              placeholder="A premium cosmetics house for the modern Sri Lankan woman."
+            />
           </FieldGroup>
-          <FieldGroup label="Address">
-            <Input value={localConfig.address} onChange={e => set('address', e.target.value)} placeholder="Colombo, Sri Lanka" />
-          </FieldGroup>
+
+          <div className="border-t border-gray-100 pt-4 space-y-4">
+            <p className="text-xs font-bold text-gray-500 uppercase tracking-widest">Contact Details</p>
+            <FieldGroup label="Contact Email">
+              <Input type="email" value={localConfig.contactEmail} onChange={e => set('contactEmail', e.target.value)} placeholder="hello@goldbeauty.lk" />
+            </FieldGroup>
+            <FieldGroup label="Phone Number">
+              <Input value={localConfig.contactPhone} onChange={e => set('contactPhone', e.target.value)} placeholder="+94 77 000 0000" />
+            </FieldGroup>
+            <FieldGroup label="Address">
+              <Input value={localConfig.address} onChange={e => set('address', e.target.value)} placeholder="Colombo, Sri Lanka" />
+            </FieldGroup>
+          </div>
         </div>
       );
 

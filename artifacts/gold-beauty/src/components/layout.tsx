@@ -76,13 +76,21 @@ export function Layout({ children }: { children: React.ReactNode }) {
             <div className="absolute left-1/2 -translate-x-1/2 text-center">
               <Link href="/">
                 <span className="cursor-pointer block">
-                  <h1 className="font-serif text-2xl md:text-3xl font-bold tracking-widest text-foreground relative inline-block">
-                    GOLD BEAUTY
-                    <span className="absolute inset-0 bg-gradient-to-r from-primary via-accent to-primary opacity-0 hover:opacity-20 transition-opacity bg-clip-text mix-blend-overlay">GOLD BEAUTY</span>
-                  </h1>
-                  <p className="text-[0.6rem] md:text-xs tracking-[0.3em] text-primary mt-1">
-                    BY SHANI RANASINGHE
-                  </p>
+                  {siteConfig.logo ? (
+                    <img src={siteConfig.logo} alt={siteConfig.storeName} className="h-10 md:h-12 object-contain mx-auto" />
+                  ) : (
+                    <>
+                      <h1 className="font-serif text-2xl md:text-3xl font-bold tracking-widest text-foreground relative inline-block">
+                        {siteConfig.storeName.toUpperCase()}
+                        <span className="absolute inset-0 bg-gradient-to-r from-primary via-accent to-primary opacity-0 hover:opacity-20 transition-opacity bg-clip-text mix-blend-overlay">{siteConfig.storeName.toUpperCase()}</span>
+                      </h1>
+                      {siteConfig.storeSubtitle && (
+                        <p className="text-[0.6rem] md:text-xs tracking-[0.3em] text-primary mt-1">
+                          {siteConfig.storeSubtitle.toUpperCase()}
+                        </p>
+                      )}
+                    </>
+                  )}
                 </span>
               </Link>
             </div>
@@ -151,14 +159,22 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8">
             <div className="col-span-1 md:col-span-1 flex flex-col items-center md:items-start text-center md:text-left">
-              <h2 className="font-serif text-2xl font-bold tracking-widest text-foreground mb-2">
-                GOLD BEAUTY
-              </h2>
-              <p className="text-xs tracking-[0.2em] text-primary mb-6">
-                BY SHANI RANASINGHE
-              </p>
+              {siteConfig.logo ? (
+                <img src={siteConfig.logo} alt={siteConfig.storeName} className="h-12 object-contain mb-4" />
+              ) : (
+                <>
+                  <h2 className="font-serif text-2xl font-bold tracking-widest text-foreground mb-2">
+                    {siteConfig.storeName.toUpperCase()}
+                  </h2>
+                  {siteConfig.storeSubtitle && (
+                    <p className="text-xs tracking-[0.2em] text-primary mb-6">
+                      {siteConfig.storeSubtitle.toUpperCase()}
+                    </p>
+                  )}
+                </>
+              )}
               <p className="text-sm text-muted-foreground max-w-xs mb-6 leading-relaxed">
-                A premium cosmetics house for the modern Sri Lankan woman. Bold, vibrant, unapologetically luxurious.
+                {siteConfig.footerTagline}
               </p>
               <div className="flex items-center gap-4 flex-wrap">
                 {siteConfig.socialMedia?.instagram && (
@@ -226,7 +242,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           </div>
           
           <div className="mt-16 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 text-xs text-muted-foreground tracking-wider">
-            <p>© {new Date().getFullYear()} Gold Beauty Fashion By Shani Ranasinghe. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} {siteConfig.storeName}{siteConfig.storeSubtitle ? ' ' + siteConfig.storeSubtitle : ''}. All rights reserved.</p>
             <div className="flex space-x-6">
               <Link href="#"><span className="hover:text-primary transition-colors cursor-pointer">Privacy Policy</span></Link>
               <Link href="#"><span className="hover:text-primary transition-colors cursor-pointer">Terms of Service</span></Link>

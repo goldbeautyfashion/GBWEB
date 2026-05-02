@@ -30,6 +30,8 @@ export interface SiteConfig {
   heroSubtitle: string;
   heroBgImage: string;
   logo: string;
+  storeSubtitle: string;
+  footerTagline: string;
   aboutTitle: string;
   aboutText: string;
   showAnnouncement: boolean;
@@ -54,6 +56,8 @@ const defaultSiteConfig: SiteConfig = {
   heroSubtitle: 'Discover opulent beauty curated for the modern Sri Lankan woman.',
   heroBgImage: '',
   logo: '',
+  storeSubtitle: 'By Shani Ranasinghe',
+  footerTagline: 'A premium cosmetics house for the modern Sri Lankan woman. Bold, vibrant, unapologetically luxurious.',
   aboutTitle: 'The Gold Standard',
   aboutText: 'We believe that luxury should not just be a label, but an experience. Every product in our collection is curated with the highest standards of quality, ensuring you receive nothing but the best.',
   showAnnouncement: true,
