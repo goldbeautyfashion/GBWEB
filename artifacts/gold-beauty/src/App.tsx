@@ -12,7 +12,7 @@ import { AdminAuthProvider, useAdminAuth } from "@/context/AdminAuthContext";
 import { Layout } from "@/components/layout";
 import { AdminLayout } from "@/components/admin/AdminLayout";
 
-// Pages
+// Public Pages
 import Home from "@/pages/home";
 import Shop from "@/pages/shop";
 import ProductDetail from "@/pages/product-detail";
@@ -29,14 +29,12 @@ import AdminCustomers from "@/pages/admin/customers";
 import AdminWebsiteEditor from "@/pages/admin/website-editor";
 import AdminAnalytics from "@/pages/admin/analytics";
 import AdminSettings from "@/pages/admin/settings";
+import AdminFinancialReport from "@/pages/admin/financial-report";
+import AdminDataManagement from "@/pages/admin/data-management";
 
 function ProtectedAdminRoute({ component: Component }: { component: React.ComponentType }) {
   const { isAuthenticated } = useAdminAuth();
-
-  if (!isAuthenticated) {
-    return <AdminLogin />;
-  }
-
+  if (!isAuthenticated) return <AdminLogin />;
   return (
     <AdminLayout>
       <Component />
@@ -48,31 +46,17 @@ function Router() {
   return (
     <Switch>
       {/* Admin Routes */}
-      <Route path="/admin">
-        <ProtectedAdminRoute component={AdminDashboard} />
-      </Route>
+      <Route path="/admin" component={() => <ProtectedAdminRoute component={AdminDashboard} />} />
       <Route path="/admin/login" component={AdminLogin} />
-      <Route path="/admin/dashboard">
-        <ProtectedAdminRoute component={AdminDashboard} />
-      </Route>
-      <Route path="/admin/orders">
-        <ProtectedAdminRoute component={AdminOrders} />
-      </Route>
-      <Route path="/admin/products">
-        <ProtectedAdminRoute component={AdminProducts} />
-      </Route>
-      <Route path="/admin/customers">
-        <ProtectedAdminRoute component={AdminCustomers} />
-      </Route>
-      <Route path="/admin/website-editor">
-        <ProtectedAdminRoute component={AdminWebsiteEditor} />
-      </Route>
-      <Route path="/admin/analytics">
-        <ProtectedAdminRoute component={AdminAnalytics} />
-      </Route>
-      <Route path="/admin/settings">
-        <ProtectedAdminRoute component={AdminSettings} />
-      </Route>
+      <Route path="/admin/dashboard" component={() => <ProtectedAdminRoute component={AdminDashboard} />} />
+      <Route path="/admin/orders" component={() => <ProtectedAdminRoute component={AdminOrders} />} />
+      <Route path="/admin/products" component={() => <ProtectedAdminRoute component={AdminProducts} />} />
+      <Route path="/admin/customers" component={() => <ProtectedAdminRoute component={AdminCustomers} />} />
+      <Route path="/admin/website-editor" component={() => <ProtectedAdminRoute component={AdminWebsiteEditor} />} />
+      <Route path="/admin/analytics" component={() => <ProtectedAdminRoute component={AdminAnalytics} />} />
+      <Route path="/admin/settings" component={() => <ProtectedAdminRoute component={AdminSettings} />} />
+      <Route path="/admin/financial-report" component={() => <ProtectedAdminRoute component={AdminFinancialReport} />} />
+      <Route path="/admin/data-management" component={() => <ProtectedAdminRoute component={AdminDataManagement} />} />
 
       {/* Public Store Routes */}
       <Route>

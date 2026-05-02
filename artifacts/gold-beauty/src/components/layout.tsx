@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'wouter';
-import { ShoppingBag, User, Menu, X, Instagram } from 'lucide-react';
+import { ShoppingBag, User, Menu, X, Instagram, Facebook, Youtube, Music2, MessageCircle } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { useSiteConfig } from '@/context/SiteConfigContext';
 import { cn } from '@/lib/utils';
@@ -163,11 +163,32 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <p className="text-sm text-muted-foreground max-w-xs mb-6 leading-relaxed">
                 A premium cosmetics house for the modern Sri Lankan woman. Bold, vibrant, unapologetically luxurious.
               </p>
-              <div className="flex items-center space-x-4">
-                <a href="#" className="text-foreground hover:text-primary transition-colors">
-                  <Instagram size={20} />
-                </a>
-                <span className="text-sm text-muted-foreground tracking-wider hover:text-primary transition-colors cursor-pointer">@goldbeautyfashion</span>
+              <div className="flex items-center gap-4 flex-wrap">
+                {siteConfig.socialMedia?.instagram && (
+                  <a href={siteConfig.socialMedia.instagram} target="_blank" rel="noopener noreferrer" className="text-foreground hover:text-primary transition-colors" title="Instagram">
+                    <Instagram size={20} />
+                  </a>
+                )}
+                {siteConfig.socialMedia?.facebook && (
+                  <a href={siteConfig.socialMedia.facebook} target="_blank" rel="noopener noreferrer" className="text-foreground hover:text-primary transition-colors" title="Facebook">
+                    <Facebook size={20} />
+                  </a>
+                )}
+                {siteConfig.socialMedia?.whatsapp && (
+                  <a href={`https://wa.me/${siteConfig.socialMedia.whatsapp}`} target="_blank" rel="noopener noreferrer" className="text-foreground hover:text-primary transition-colors" title="WhatsApp">
+                    <MessageCircle size={20} />
+                  </a>
+                )}
+                {siteConfig.socialMedia?.tiktok && (
+                  <a href={siteConfig.socialMedia.tiktok} target="_blank" rel="noopener noreferrer" className="text-foreground hover:text-primary transition-colors" title="TikTok">
+                    <Music2 size={20} />
+                  </a>
+                )}
+                {siteConfig.socialMedia?.youtube && (
+                  <a href={siteConfig.socialMedia.youtube} target="_blank" rel="noopener noreferrer" className="text-foreground hover:text-primary transition-colors" title="YouTube">
+                    <Youtube size={20} />
+                  </a>
+                )}
               </div>
             </div>
             
