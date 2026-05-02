@@ -1,5 +1,6 @@
 import { Switch, Route, Router as WouterRouter } from "wouter";
 import { Toaster } from "@/components/ui/toaster";
+import { Toaster as SonnerToaster } from "sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 import { CartProvider } from "@/context/CartContext";
@@ -100,6 +101,7 @@ function App() {
               <Router />
             </WouterRouter>
             <Toaster />
+            <SonnerToaster position="top-right" richColors />
           </TooltipProvider>
         </CartProvider>
       </AdminAuthProvider>

@@ -4,15 +4,21 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Search, Filter, Plus, Edit, Trash2, LayoutGrid, List } from 'lucide-react';
-import { products, categories } from '@/data/products';
+import { products } from '@/data/products';
 
 export default function AdminProducts() {
   const [view, setView] = useState<'table' | 'grid'>('table');
   const [activeTab, setActiveTab] = useState('All');
-  
-  const filteredProducts = activeTab === 'All' 
-    ? products 
-    : products.filter(p => p.category === activeTab);
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const uniqueCategories = [...new Set(products.map(p => p.category))].sort();
+
+  const filteredProducts = products.filter(p => {
+    const matchesCategory = activeTab === 'All' || p.category === activeTab;
+    const matchesSearch = p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      p.category.toLowerCase().includes(searchTerm.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
 
   return (
     <motion.div
@@ -41,15 +47,15 @@ export default function AdminProducts() {
           >
             All Products
           </button>
-          {categories.map(c => (
+          {uniqueCategories.map(cat => (
             <button 
-              key={c.name}
-              onClick={() => setActiveTab(c.name)}
+              key={cat}
+              onClick={() => setActiveTab(cat)}
               className={`px-4 py-2 text-sm font-medium rounded-full transition-colors whitespace-nowrap ${
-                activeTab === c.name ? 'bg-primary text-white' : 'bg-white text-muted-foreground hover:bg-gray-50'
+                activeTab === cat ? 'bg-primary text-white' : 'bg-white text-muted-foreground hover:bg-gray-50'
               }`}
             >
-              {c.name}
+              {cat}
             </button>
           ))}
         </div>
@@ -75,7 +81,12 @@ export default function AdminProducts() {
           <div className="p-4 border-b border-border flex gap-4 bg-gray-50/50 rounded-t-xl">
             <div className="relative w-full max-w-md">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size={16} />
-              <Input placeholder="Search products..." className="pl-9 bg-white" />
+              <Input 
+              placeholder="Search products..." 
+              className="pl-9 bg-white"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
             </div>
             <Button variant="outline" className="bg-white flex items-center gap-2">
               <Filter size={16} />
